@@ -108,7 +108,7 @@ body{background:#f9fafb}
 {{-- KPI Row --}}
 <div class="stats-grid">
   <div class="stat-card">
-    <div class="stat-label">Total Pelamar</div>
+    <div class="stat-label">Total Kandidat</div>
     <div class="stat-value" style="color:var(--fi-gray-900)">{{ number_format($stats['total_kandidat']) }}</div>
     <div class="stat-sub">Ghisna · Nisa · Wiwit</div>
     <div class="stat-bar"><div class="stat-fill" style="width:100%;background:var(--fi-gray-900)"></div></div>

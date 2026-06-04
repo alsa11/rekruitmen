@@ -87,6 +87,7 @@ body{background:var(--bg);color:var(--text);font-size:14px;margin:0;min-height:1
         @if($rc>0)<span style="background:#fef3c7;color:#92400e;font-size:10px;font-weight:600;padding:1px 6px;border-radius:999px;margin-left:4px">{{ $rc }}</span>@endif
       </a>
       <a href="/admin">Kelola Data</a>
+      @guest<a href="/login" style="display:inline-flex;align-items:center;gap:6px;background:#f97316;color:#fff;padding:7px 14px;border-radius:7px;font-size:13px;font-weight:600;text-decoration:none">Masuk →</a>@endguest
     </nav>
 
     {{-- Kanan --}}
