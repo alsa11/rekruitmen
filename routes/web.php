@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JoinController;
 use App\Http\Controllers\KandidatController;
+use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth','verified'])->group(function () {
     Route::get('/', [DashboardController::class,'index'])->name('dashboard');

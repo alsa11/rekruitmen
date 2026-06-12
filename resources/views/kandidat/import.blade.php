@@ -1,25 +1,60 @@
 @extends('layouts.app')
 @section('content')
-<div class="max-w-lg mx-auto">
-  <h2 class="text-xl font-bold mb-4">Import Excel</h2>
-  <div class="bg-white rounded-xl border p-6">
+
+<div style="max-width:700px; margin:0 auto">
+  <h2 style="font-size:1.4rem; font-weight:700; color:var(--text); margin-bottom:20px">Import & Export Data</h2>
+
+  {{-- Import --}}
+  <div style="background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:24px; margin-bottom:20px">
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px">
+      <div style="width:32px; height:32px; background:#eff6ff; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:16px">↑</div>
+      <div style="font-size:15px; font-weight:600; color:var(--text)">Import dari Excel</div>
+    </div>
     <form method="POST" action="{{ route('kandidat.import.post') }}" enctype="multipart/form-data">
       @csrf
-      @if($errors->any())
-        <div class="bg-red-50 border border-red-200 rounded-lg p-3 mb-4 text-sm text-red-700">
-          {{ $errors->first() }}
-        </div>
-      @endif
-      <div class="border-2 border-dashed border-slate-300 rounded-xl p-8 text-center hover:border-blue-400 transition mb-4">
-        <div class="text-3xl mb-2">📊</div>
-        <p class="text-sm text-slate-500 mb-3">Upload file Excel rekruitmen kamu</p>
-        <input type="file" name="file_excel" accept=".xlsx,.xls" class="text-sm w-full">
-        <p class="text-xs text-slate-400 mt-2">Sheet yang akan diimport: Ghisna · Nisa · Wiwit</p>
+      <div style="margin-bottom:16px">
+        <label style="display:block; font-size:13px; font-weight:500; color:var(--text); margin-bottom:6px">Jenis Data</label>
+        <select name="jenis" style="width:100%; border:1px solid var(--border); border-radius:8px; padding:9px 14px; font-size:13px; background:var(--surface); color:var(--text)">
+          <option value="kandidat">Kandidat (Sheet: Ghisna, Nisa, Wiwit)</option>
+          <option value="join">Data JOIN</option>
+          <option value="onboard">OnBoard (Operator & Staff)</option>
+          <option value="os">Man Power OS</option>
+          <option value="surat_pg">Surat PG</option>
+        </select>
       </div>
-      <button type="submit" class="w-full bg-slate-900 text-white py-3 rounded-lg font-medium hover:bg-slate-800">
+      <div style="border:2px dashed var(--border); border-radius:10px; padding:28px; text-align:center; margin-bottom:16px">
+        <div style="font-size:28px; margin-bottom:8px">📊</div>
+        <div style="font-size:13px; color:var(--muted); margin-bottom:12px">Upload file Excel rekruitmen kamu</div>
+        <input type="file" name="file_excel" accept=".xlsx,.xls" required
+               style="display:block; margin:0 auto; font-size:13px">
+        <div style="font-size:11px; color:var(--muted); margin-top:8px">Sheet yang akan diimport: Ghisna · Nisa · Wiwit</div>
+      </div>
+      <button type="submit" style="width:100%; background:#0f1117; color:white; padding:12px; border-radius:8px; font-size:14px; font-weight:600; border:none; cursor:pointer">
         📥 Import Sekarang
       </button>
     </form>
   </div>
+
+  {{-- Export --}}
+  <div style="background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:24px">
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px">
+      <div style="width:32px; height:32px; background:#f0fdf4; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:16px">↓</div>
+      <div style="font-size:15px; font-weight:600; color:var(--text)">Export ke Excel</div>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px">
+      @foreach([
+        ['Kandidat',     route('kandidat.export',['type'=>'kandidat'])],
+        ['Data JOIN',    route('kandidat.export',['type'=>'join'])],
+        ['OnBoard',      route('kandidat.export',['type'=>'onboard'])],
+        ['Man Power OS', route('kandidat.export',['type'=>'os'])],
+        ['Surat PG',     route('kandidat.export',['type'=>'surat_pg'])],
+      ] as [$label,$url])
+      <a href="{{ $url }}" style="display:flex; align-items:center; gap:8px; padding:12px 16px; border:1px solid var(--border); border-radius:8px; font-size:13px; font-weight:500; color:var(--text); text-decoration:none; background:var(--bg)">
+        <span style="color:#16a34a; font-size:16px">↓</span> {{ $label }}
+      </a>
+      @endforeach
+    </div>
+  </div>
+
 </div>
 @endsection

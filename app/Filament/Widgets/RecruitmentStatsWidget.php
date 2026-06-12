@@ -18,14 +18,11 @@ class RecruitmentStatsWidget extends BaseWidget
 
         return [
             Stat::make('Total Kandidat', number_format($total))
-                ->description('Ghisna · Nisa · Wiwit')
-                ->color('gray'),
+                ->description('Ghisna · Nisa · Wiwit')->color('gray'),
             Stat::make('Diterima', number_format($diterima))
-                ->description('Konversi '.$konversi.'%')
-                ->color('success'),
+                ->description('Konversi '.$konversi.'%')->color('success'),
             Stat::make('Ditolak / NG', number_format($ditolak))
-                ->description('Rejection '.($total>0?round($ditolak/$total*100,1):0).'%')
-                ->color('danger'),
+                ->description('Rejection '.($total>0?round($ditolak/$total*100,1):0).'%')->color('danger'),
             Stat::make('Sedang Proses', number_format($proses))
                 ->description('Dipertimbangkan: '.Kandidat::where('status_akhir','dipertimbangkan')->count())
                 ->color('warning'),

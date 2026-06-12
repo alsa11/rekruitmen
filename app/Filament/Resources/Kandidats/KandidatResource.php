@@ -15,6 +15,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+
 class KandidatResource extends Resource
 {
     protected static ?string $model = Kandidat::class;
@@ -30,42 +31,33 @@ class KandidatResource extends Resource
     public static function getRelations(): array { return []; }
     public static function getPages(): array {
         return [
-            'index'            => ListKandidats::route('/'),
-            'ghisna'           => ListKandidatsGhisna::route('/ghisna'),
-            'nisa'             => ListKandidatsNisa::route('/nisa'),
-            'wiwit'            => ListKandidatsWiwit::route('/wiwit'),
-            'dipertimbangkan'  => ListKandidatsDipertimbangkan::route('/dipertimbangkan'),
-            'create'           => CreateKandidat::route('/create'),
-            'edit'             => EditKandidat::route('/{record}/edit'),
+            'index'           => ListKandidats::route('/'),
+            'ghisna'          => ListKandidatsGhisna::route('/ghisna'),
+            'nisa'            => ListKandidatsNisa::route('/nisa'),
+            'wiwit'           => ListKandidatsWiwit::route('/wiwit'),
+            'dipertimbangkan' => ListKandidatsDipertimbangkan::route('/dipertimbangkan'),
+            'create'          => CreateKandidat::route('/create'),
+            'edit'            => EditKandidat::route('/{record}/edit'),
         ];
     }
     public static function getNavigationItems(): array {
         return [
             \Filament\Navigation\NavigationItem::make('Semua Kandidat')
-                ->icon('heroicon-o-users')
-                ->url(static::getUrl('index'))
-                ->sort(1)->group('Pipeline')
-                ->badge(Kandidat::count()),
+                ->icon('heroicon-o-users')->url(static::getUrl('index'))
+                ->sort(1)->group('Pipeline')->badge(Kandidat::count()),
             \Filament\Navigation\NavigationItem::make('Ghisna')
-                ->icon('heroicon-o-user')
-                ->url(static::getUrl('ghisna'))
-                ->sort(2)->group('Pipeline')
-                ->badge(Kandidat::where('pic','Ghisna')->count()),
+                ->icon('heroicon-o-user')->url(static::getUrl('ghisna'))
+                ->sort(2)->group('Pipeline')->badge(Kandidat::where('pic','Ghisna')->count()),
             \Filament\Navigation\NavigationItem::make('Nisa')
-                ->icon('heroicon-o-user')
-                ->url(static::getUrl('nisa'))
-                ->sort(3)->group('Pipeline')
-                ->badge(Kandidat::where('pic','Nisa')->count()),
+                ->icon('heroicon-o-user')->url(static::getUrl('nisa'))
+                ->sort(3)->group('Pipeline')->badge(Kandidat::where('pic','Nisa')->count()),
             \Filament\Navigation\NavigationItem::make('Wiwit')
-                ->icon('heroicon-o-user')
-                ->url(static::getUrl('wiwit'))
-                ->sort(4)->group('Pipeline')
-                ->badge(Kandidat::where('pic','Wiwit')->count()),
+                ->icon('heroicon-o-user')->url(static::getUrl('wiwit'))
+                ->sort(4)->group('Pipeline')->badge(Kandidat::where('pic','Wiwit')->count()),
             \Filament\Navigation\NavigationItem::make('Dipertimbangkan')
-                ->icon('heroicon-o-clock')
-                ->url(static::getUrl('dipertimbangkan'))
+                ->icon('heroicon-o-clock')->url(static::getUrl('dipertimbangkan'))
                 ->sort(5)->group('Pipeline')
-                ->badge(Kandidat::where('status_akhir','dipertimbangkan')->count())
+                ->badge(Kandidat::where('status_akhir','dipertimbangkan')->count()),
         ];
     }
 }
