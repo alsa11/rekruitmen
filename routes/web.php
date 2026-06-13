@@ -1,16 +1,15 @@
 <?php
-
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JoinController;
-use App\Http\Controllers\KandidatController;
+use App\Http\Controllers\ImportController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth','verified'])->group(function () {
     Route::get('/', [DashboardController::class,'index'])->name('dashboard');
     Route::get('/reminder-kontrak', [JoinController::class,'reminder'])->name('join.reminder');
-    Route::get('/import',  [KandidatController::class,'importForm'])->name('kandidat.import');
-    Route::post('/import', [KandidatController::class,'import'])->name('kandidat.import.post');
-    Route::get('/export',  [KandidatController::class,'export'])->name('kandidat.export');
+    Route::get('/import', [ImportController::class,'index'])->name('kandidat.import');
+    Route::post('/import', [ImportController::class,'import'])->name('import.post');
+    Route::get('/export/{type}', [ImportController::class,'export'])->name('export');
     Route::get('/kandidat', fn() => redirect('/admin/kandidats'))->name('kandidat.index');
     Route::get('/pipeline/{pic}', fn($pic) => redirect('/admin/kandidats'))->name('kandidat.pipeline');
     Route::get('/join', fn() => redirect('/admin/joins'))->name('join.index');
