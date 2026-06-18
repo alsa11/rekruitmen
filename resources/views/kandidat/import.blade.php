@@ -43,11 +43,11 @@
     </div>
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px">
       @foreach([
-        ['Kandidat',     route('kandidat.export',['type'=>'kandidat'])],
-        ['Data JOIN',    route('kandidat.export',['type'=>'join'])],
-        ['OnBoard',      route('kandidat.export',['type'=>'onboard'])],
-        ['Man Power OS', route('kandidat.export',['type'=>'os'])],
-        ['Surat PG',     route('kandidat.export',['type'=>'surat_pg'])],
+        ['Kandidat',     route('export',['type'=>'kandidat'])],
+        ['Data JOIN',    route('export',['type'=>'join'])],
+        ['OnBoard',      route('export',['type'=>'onboard'])],
+        ['Man Power OS', route('export',['type'=>'os'])],
+        ['Surat PG',     route('export',['type'=>'surat_pg'])],
       ] as [$label,$url])
       <a href="{{ $url }}" style="display:flex; align-items:center; gap:8px; padding:12px 16px; border:1px solid var(--border); border-radius:8px; font-size:13px; font-weight:500; color:var(--text); text-decoration:none; background:var(--bg)">
         <span style="color:#16a34a; font-size:16px">↓</span> {{ $label }}

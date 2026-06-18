@@ -27,7 +27,7 @@ class DashboardController extends Controller
             'join'           => Join::count(),
             'onboard_op'     => Onboard::where('level','operator')->count(),
             'onboard_staff'  => Onboard::where('level','staff')->count(),
-            'onboard_bulan'  => Onboard::whereMonth('join_date', now()->month)->count(),
+            'onboard_bulan'  => Onboard::whereMonth('join_date', now()->month)->whereYear('join_date', now()->year)->count(),
             'surat_pg'       => SuratPg::count(),
             'os_total'       => Os::count(),
         ];

@@ -13,7 +13,7 @@ class Kandidat extends Model
         'app_form','ket_app_form',
         'interview_offline','hasil_offline','ket_offline',
         'psikotest','ket_psikotest',
-        'status_akhir','tanggal_join','catatan','cv_file','app_form_file','sumber_sheet',
+        'status_akhir','tanggal_join','catatan','cv_file','app_form_file','hasil_interview_online','app_form_hasil_test','sumber_sheet',
     ];
 
     protected $casts = [

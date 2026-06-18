@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="max-w-xl mx-auto">
-  <h2 class="text-xl font-bold mb-4">Tambah Surat PG</h2>
+  <h2 class="text-xl font-bold mb-4">Tambah NO Surat</h2>
   <div class="bg-white rounded-xl border p-6">
     <form method="POST" action="{{ route('surat-pg.store') }}">
       @csrf

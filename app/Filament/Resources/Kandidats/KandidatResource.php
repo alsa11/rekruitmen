@@ -6,7 +6,6 @@ use App\Filament\Resources\Kandidats\Pages\ListKandidats;
 use App\Filament\Resources\Kandidats\Pages\ListKandidatsGhisna;
 use App\Filament\Resources\Kandidats\Pages\ListKandidatsNisa;
 use App\Filament\Resources\Kandidats\Pages\ListKandidatsWiwit;
-use App\Filament\Resources\Kandidats\Pages\ListKandidatsDipertimbangkan;
 use App\Filament\Resources\Kandidats\Schemas\KandidatForm;
 use App\Filament\Resources\Kandidats\Tables\KandidatsTable;
 use App\Models\Kandidat;
@@ -35,7 +34,6 @@ class KandidatResource extends Resource
             'ghisna'          => ListKandidatsGhisna::route('/ghisna'),
             'nisa'            => ListKandidatsNisa::route('/nisa'),
             'wiwit'           => ListKandidatsWiwit::route('/wiwit'),
-            'dipertimbangkan' => ListKandidatsDipertimbangkan::route('/dipertimbangkan'),
             'create'          => CreateKandidat::route('/create'),
             'edit'            => EditKandidat::route('/{record}/edit'),
         ];
@@ -54,10 +52,6 @@ class KandidatResource extends Resource
             \Filament\Navigation\NavigationItem::make('Wiwit')
                 ->icon('heroicon-o-user')->url(static::getUrl('wiwit'))
                 ->sort(4)->group('Pipeline')->badge(Kandidat::where('pic','Wiwit')->count()),
-            \Filament\Navigation\NavigationItem::make('Dipertimbangkan')
-                ->icon('heroicon-o-clock')->url(static::getUrl('dipertimbangkan'))
-                ->sort(5)->group('Pipeline')
-                ->badge(Kandidat::where('status_akhir','dipertimbangkan')->count()),
         ];
     }
 }

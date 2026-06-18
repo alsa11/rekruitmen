@@ -55,9 +55,15 @@ class KandidatForm
             Select::make('interview_online')->label('Interview Online')
                 ->options(['belum'=>'Belum','hadir'=>'Hadir','tidak_hadir'=>'Tidak Hadir','reschedule'=>'Reschedule','sudah_dalam_proses'=>'Sudah Dalam Proses','belum_lolos'=>'Belum Lolos'])
                 ->default('belum'),
+            Select::make('hasil_interview_online')->label('Hasil Interview Online')
+                ->options(['belum'=>'Belum','ok'=>'OK','ng'=>'NG'])
+                ->default('belum'),
             Textarea::make('ket_interview_online')->label('Ket. Interview Online')->columnSpanFull(),
             Select::make('app_form')->label('Status App Form')
                 ->options(['belum'=>'Belum','terkirim'=>'Terkirim','lanjut_offline'=>'Lanjut Offline','lanjut_user'=>'Lanjut User','dialihkan'=>'Dialihkan','mundur'=>'Mundur'])
+                ->default('belum'),
+            Select::make('app_form_hasil_test')->label('Aplikasi Form Hasil Test')
+                ->options(['belum'=>'Belum','ready'=>'Ready','sending'=>'Sending','tidak_dikirim'=>'Tidak Dikirim'])
                 ->default('belum'),
             Textarea::make('ket_app_form')->label('Ket. App Form')->columnSpanFull(),
             Select::make('interview_offline')->label('Interview Offline')

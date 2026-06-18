@@ -350,7 +350,7 @@ const grid='#f3f4f6', tick={family:'ui-sans-serif,system-ui,sans-serif',size:11}
   for($i=5;$i>=0;$i--){
     $b=now()->subMonths($i);
     $months[]=$b->format('M Y');
-    $totM[]=\App\Models\Kandidat::whereMonth('created_at',$b->month)->whereYear('created_at',$b->year)->count();
+    $totM[]=\App\Models\Kandidat::whereMonth('tanggal_interview',$b->month)->whereYear('tanggal_interview',$b->year)->count();
     $ditM[]=\App\Models\Kandidat::where('status_akhir','diterima')->whereMonth('updated_at',$b->month)->whereYear('updated_at',$b->year)->count();
     $ditolakM[]=\App\Models\Kandidat::where('status_akhir','ditolak')->whereMonth('updated_at',$b->month)->whereYear('updated_at',$b->year)->count();
   }

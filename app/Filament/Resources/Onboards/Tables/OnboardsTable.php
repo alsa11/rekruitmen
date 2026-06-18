@@ -6,6 +6,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
 class OnboardsTable
@@ -15,7 +16,7 @@ class OnboardsTable
         return $table
             ->columns([
                 TextColumn::make('nama')
-                    ->searchable(),
+                    ->searchable()->sortable()->weight('bold'),
                 TextColumn::make('nik_ktp')
                     ->searchable(),
                 TextColumn::make('onboarding_date')
@@ -25,13 +26,13 @@ class OnboardsTable
                     ->date()
                     ->sortable(),
                 TextColumn::make('job_title')
-                    ->searchable(),
+                    ->searchable()->sortable(),
                 TextColumn::make('level')
-                    ->badge(),
+                    ->badge()->sortable(),
                 TextColumn::make('departemen')
-                    ->searchable(),
+                    ->searchable()->sortable(),
                 TextColumn::make('divisi')
-                    ->searchable(),
+                    ->searchable()->sortable(),
                 TextColumn::make('email')
                     ->label('Email address')
                     ->searchable(),
@@ -40,15 +41,15 @@ class OnboardsTable
                 TextColumn::make('alamat')
                     ->searchable(),
                 TextColumn::make('status_kontrak')
-                    ->badge(),
+                    ->badge()->sortable(),
                 TextColumn::make('lama_kontrak')
-                    ->searchable(),
+                    ->searchable()->sortable(),
                 TextColumn::make('pic')
-                    ->searchable(),
+                    ->searchable()->sortable()->badge(),
                 TextColumn::make('lokasi')
-                    ->searchable(),
+                    ->searchable()->sortable(),
                 TextColumn::make('status_makan')
-                    ->searchable(),
+                    ->searchable()->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -59,7 +60,20 @@ class OnboardsTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                SelectFilter::make('departemen')->label('Departemen')
+                    ->options(\App\Models\Onboard::distinct()->pluck('departemen','departemen')->filter()->toArray())
+                    ->searchable(),
+                SelectFilter::make('divisi')->label('Divisi')
+                    ->options(\App\Models\Onboard::distinct()->pluck('divisi','divisi')->filter()->toArray())
+                    ->searchable(),
+                SelectFilter::make('level')->label('Level')
+                    ->options(\App\Models\Onboard::distinct()->pluck('level','level')->filter()->toArray()),
+                SelectFilter::make('status_kontrak')->label('Status Kontrak')
+                    ->options(\App\Models\Onboard::distinct()->pluck('status_kontrak','status_kontrak')->filter()->toArray()),
+                SelectFilter::make('pic')->label('PIC')
+                    ->options(['Ghisna'=>'Ghisna','Nisa'=>'Nisa','Wiwit'=>'Wiwit']),
+                SelectFilter::make('status_makan')->label('Status Makan')
+                    ->options(\App\Models\Onboard::distinct()->pluck('status_makan','status_makan')->filter()->toArray()),
             ])
             ->recordActions([
                 EditAction::make(),
@@ -68,6 +82,7 @@ class OnboardsTable
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->defaultSort('id','desc');
     }
 }

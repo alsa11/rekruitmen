@@ -34,8 +34,14 @@ class KandidatsTable
                 TextColumn::make('interview_online')->label('Int. Online')->badge()->color(fn($state) => match($state) {
                     'hadir' => 'success', 'tidak_hadir','belum_lolos' => 'danger', 'reschedule' => 'warning', default => 'gray',
                 }),
+                TextColumn::make('hasil_interview_online')->label('Hasil Int. Online')->badge()->color(fn($state) => match($state) {
+                    'ok' => 'success', 'ng' => 'danger', default => 'gray',
+                }),
                 TextColumn::make('app_form')->label('App Form')->badge()->color(fn($state) => match($state) {
                     'terkirim','lanjut_offline','lanjut_user' => 'success', 'mundur','dialihkan' => 'danger', default => 'gray',
+                }),
+                TextColumn::make('app_form_hasil_test')->label('Hasil Test')->badge()->color(fn($state) => match($state) {
+                    'ready' => 'success', 'sending' => 'warning', 'tidak_dikirim' => 'danger', default => 'gray',
                 }),
                 TextColumn::make('interview_offline')->label('Int. Offline')->badge()->color(fn($state) => match($state) {
                     'hadir' => 'success', 'tidak_hadir','tidak_respon' => 'danger', 'reschedule' => 'warning', default => 'gray',
@@ -57,6 +63,10 @@ class KandidatsTable
                     ->options(['proses'=>'Proses','diterima'=>'Diterima','ditolak'=>'Ditolak','dipertimbangkan'=>'Dipertimbangkan','mundur'=>'Mundur']),
                 SelectFilter::make('interview_online')->label('Int. Online')
                     ->options(['belum'=>'Belum','hadir'=>'Hadir','tidak_hadir'=>'Tidak Hadir','reschedule'=>'Reschedule']),
+                SelectFilter::make('hasil_interview_online')->label('Hasil Int. Online')
+                    ->options(['belum'=>'Belum','ok'=>'OK','ng'=>'NG']),
+                SelectFilter::make('app_form_hasil_test')->label('Hasil Test App Form')
+                    ->options(['belum'=>'Belum','ready'=>'Ready','sending'=>'Sending','tidak_dikirim'=>'Tidak Dikirim']),
             ])
             ->recordActions([EditAction::make()])
             ->toolbarActions([BulkActionGroup::make([DeleteBulkAction::make()])])

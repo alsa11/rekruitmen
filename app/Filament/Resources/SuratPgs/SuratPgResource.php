@@ -17,9 +17,9 @@ class SuratPgResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;
     protected static ?string $recordTitleAttribute = 'nama';
     public static function getNavigationGroup(): ?string { return 'Surat & Dokumen'; }
-    protected static ?string $navigationLabel = 'Surat PG';
-    protected static ?string $modelLabel = 'Surat PG';
-    protected static ?string $pluralModelLabel = 'Surat PG';
+    protected static ?string $navigationLabel = 'Nomor Surat';
+    protected static ?string $modelLabel = 'Nomor Surat';
+    protected static ?string $pluralModelLabel = 'Nomor Surat';
     protected static ?int $navigationSort = 1;
     public static function form(Schema $schema): Schema { return SuratPgForm::configure($schema); }
     public static function table(Table $table): Table { return SuratPgsTable::configure($table); }

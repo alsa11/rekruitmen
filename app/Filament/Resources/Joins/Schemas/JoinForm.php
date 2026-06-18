@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Joins\Schemas;
 
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
@@ -22,7 +23,13 @@ class JoinForm
                 TextInput::make('user_pic'),
                 TextInput::make('penempatan'),
                 TextInput::make('laptop_needs'),
-                TextInput::make('laptop_memo'),
+                FileUpload::make('laptop_memo')
+                    ->label('Upload Memo Laptop (PDF/Word)')
+                    ->acceptedFileTypes(['application/pdf','application/msword','application/vnd.openxmlformats-officedocument.wordprocessingml.document'])
+                    ->maxSize(10240)
+                    ->disk('public')->directory('memo-laptop')->preserveFilenames()
+                    ->downloadable()
+                    ->columnSpanFull(),
                 TextInput::make('rek_danamon'),
                 Select::make('status_kontrak')
                     ->options(['probation' => 'Probation', 'kontrak' => 'Kontrak', 'tetap' => 'Tetap'])

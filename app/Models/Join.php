@@ -24,5 +24,16 @@ class Join extends Model
                 $join->updateQuietly(["status_kontrak" => "selesai"]);
             }
         });
+
+        static::created(function ($join) {
+            SuratPg::create([
+                'nama_karyawan' => $join->nama,
+                'departemen'    => $join->divisi,
+                'posisi'        => $join->posisi,
+                'tanggal_join'  => $join->join_date,
+                'pic'           => $join->pic,
+                'status_ttd'    => 'belum',
+            ]);
+        });
     }
 }

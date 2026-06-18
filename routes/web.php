@@ -9,6 +9,7 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get('/reminder-kontrak', [JoinController::class,'reminder'])->name('join.reminder');
     Route::get('/import', [ImportController::class,'index'])->name('kandidat.import');
     Route::post('/import', [ImportController::class,'import'])->name('import.post');
+    Route::get('/export', [ImportController::class,'index'])->name('export.index');
     Route::get('/export/{type}', [ImportController::class,'export'])->name('export');
     Route::get('/kandidat', fn() => redirect('/admin/kandidats'))->name('kandidat.index');
     Route::get('/pipeline/{pic}', fn($pic) => redirect('/admin/kandidats'))->name('kandidat.pipeline');

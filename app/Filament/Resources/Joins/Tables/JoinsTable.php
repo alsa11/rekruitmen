@@ -32,6 +32,11 @@ class JoinsTable
                 TextColumn::make('user_pic')->label('User PIC')->searchable()->sortable(),
                 TextColumn::make('penempatan')->label('Penempatan')->searchable()->toggleable(),
                 TextColumn::make('laptop_needs')->label('Laptop')->searchable()->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('laptop_memo')->label('Memo Laptop')
+                    ->formatStateUsing(fn($state) => $state ? '📎 Lihat Memo' : '-')
+                    ->url(fn($record) => $record->laptop_memo ? asset('storage/'.$record->laptop_memo) : null)
+                    ->openUrlInNewTab()
+                    ->color(fn($state) => $state ? 'info' : 'gray'),
                 TextColumn::make('rek_danamon')->label('Rek. Danamon')->searchable()->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
