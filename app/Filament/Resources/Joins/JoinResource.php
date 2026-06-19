@@ -17,9 +17,9 @@ class JoinResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocumentList;
     protected static ?string $recordTitleAttribute = 'nama';
     public static function getNavigationGroup(): ?string { return 'Tracking Join'; }
-    protected static ?string $navigationLabel = 'Data JOIN';
-    protected static ?string $modelLabel = 'Data JOIN';
-    protected static ?string $pluralModelLabel = 'Data JOIN';
+    protected static ?string $navigationLabel = 'Lolos Seleksi';
+    protected static ?string $modelLabel = 'Lolos Seleksi';
+    protected static ?string $pluralModelLabel = 'Lolos Seleksi';
     protected static ?int $navigationSort = 1;
     public static function form(Schema $schema): Schema { return JoinForm::configure($schema); }
     public static function table(Table $table): Table { return JoinsTable::configure($table); }

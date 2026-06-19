@@ -17,26 +17,34 @@ use Filament\Tables\Filters\Filter;
 class TrackingJadwalResource extends Resource
 {
     protected static ?string $model = TrackingJadwal::class;
-    protected static ?string $modelLabel = 'Jadwal';
-    protected static ?string $pluralModelLabel = 'Main Tracking';
+    protected static ?string $modelLabel = 'Jadwal Wawancara';
+    protected static ?string $pluralModelLabel = 'Main Tracking — Wawancara Online & Offline';
     protected static ?int $navigationSort = 0;
 
     public static function getNavigationIcon(): string|\BackedEnum|null { return 'heroicon-o-calendar-days'; }
-    public static function getNavigationLabel(): string { return 'Main Tracking'; }
+    public static function getNavigationLabel(): string { return 'Main Tracking — Wawancara Online & Offline'; }
     public static function getNavigationGroup(): ?string { return 'Pipeline'; }
 
     public static function form(Schema $schema): Schema
     {
         return $schema->components([
             Grid::make(2)->schema([
-                TextInput::make('posisi')->label('Kebutuhan OS')->required()->placeholder('contoh: Leader Warehouse'),
-                DatePicker::make('tanggal')->label('Tanggal')->required()->default(today()),
-                TextInput::make('jam')->label('Jam')->placeholder('09.00 - 11.30 & 13.30 s/d 15.00'),
-                Select::make('tipe_kegiatan')->label('Kegiatan')
-                    ->options(['online'=>'Online','test_onsite'=>'Test Onsite','intvw_user'=>'Interview User'])
+                TextInput::make('posisi')->label('Kebutuhan Posisi')->required()->placeholder('contoh: Leader Warehouse'),
+                DatePicker::make('tanggal')->label('Tanggal Wawancara')->required()->default(today()),
+                TextInput::make('jam')->label('Jam Wawancara')->placeholder('09.00 - 11.30 & 13.30 s/d 15.00'),
+                Select::make('tipe_kegiatan')->label('Metode Wawancara')
+                    ->options([
+                        'online'      => 'Wawancara Online (Gmeet/Zoom)',
+                        'test_onsite' => 'Wawancara Offline / Onsite',
+                        'intvw_user'  => 'Interview User (Onsite)',
+                    ])
                     ->default('online')->required(),
                 TextInput::make('sourcing')->label('Sourcing'),
-                Select::make('pic_hrd')->label('PIC HRD')
+                Select::make('pic_pewawancara')->label('Pewawancara')
+                    ->options(['Ghisna'=>'Ghisna','Nisa'=>'Nisa','Wiwit'=>'Wiwit','Fanny'=>'Fanny'])
+                    ->helperText('PIC yang akan mewawancarai kandidat secara langsung')
+                    ->required(),
+                Select::make('pic_hrd')->label('PIC HRD Penjadwal')
                     ->options(['Ghisna'=>'Ghisna','Nisa'=>'Nisa','Wiwit'=>'Wiwit','Fanny'=>'Fanny']),
                 TextInput::make('link_gmeet')->label('Link Gmeet')->placeholder('https://meet.google.com/...')->columnSpan(2),
                 Select::make('status')->label('Notes / Status')
@@ -50,20 +58,24 @@ class TrackingJadwalResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('posisi')->label('Kebutuhan OS')->searchable()->sortable()->weight('bold'),
+                TextColumn::make('posisi')->label('Kebutuhan Posisi')->searchable()->sortable()->weight('bold'),
                 TextColumn::make('tanggal')->label('Tanggal')->date('d M Y')->sortable()
                     ->color(fn(TrackingJadwal $r): ?string => $r->tanggal->isToday() ? 'warning' : null),
                 TextColumn::make('jam')->label('Jam'),
-                TextColumn::make('tipe_kegiatan')->label('Kegiatan')->badge()
+                TextColumn::make('tipe_kegiatan')->label('Metode')->badge()
                     ->formatStateUsing(fn(string $state): string => match($state) {
-                        'online' => 'Online', 'test_onsite' => 'Test Onsite', 'intvw_user' => 'Intvw User', default => ucfirst($state),
+                        'online' => 'Online', 'test_onsite' => 'Offline / Onsite', 'intvw_user' => 'Intvw User', default => ucfirst($state),
                     })
                     ->color(fn(string $state): string => match($state) {
                         'online' => 'info', 'test_onsite' => 'warning', 'intvw_user' => 'success', default => 'gray',
                     }),
                 TextColumn::make('sourcing')->label('Sourcing')->color('gray'),
+                TextColumn::make('pic_pewawancara')->label('Pewawancara')->badge()->sortable()
+                    ->color(fn(?string $state): string => match($state) {
+                        'Ghisna' => 'primary', 'Nisa' => 'info', 'Wiwit' => 'danger', default => 'gray',
+                    }),
                 TextColumn::make('pic_hrd')->label('PIC HRD')->badge()
-                    ->color(fn(string $state): string => match($state) {
+                    ->color(fn(?string $state): string => match($state) {
                         'Ghisna' => 'primary', 'Nisa' => 'info', 'Wiwit' => 'danger', default => 'gray',
                     }),
                 TextColumn::make('link_gmeet')->label('Link Gmeet')
@@ -75,10 +87,10 @@ class TrackingJadwalResource extends Resource
             ])
             ->defaultSort('tanggal','asc')
             ->filters([
-                SelectFilter::make('pic_hrd')->label('PIC HRD')
+                SelectFilter::make('pic_pewawancara')->label('Pewawancara')
                     ->options(['Ghisna'=>'Ghisna','Nisa'=>'Nisa','Wiwit'=>'Wiwit','Fanny'=>'Fanny']),
-                SelectFilter::make('tipe_kegiatan')->label('Kegiatan')
-                    ->options(['online'=>'Online','test_onsite'=>'Test Onsite','intvw_user'=>'Intvw User']),
+                SelectFilter::make('tipe_kegiatan')->label('Metode')
+                    ->options(['online'=>'Online','test_onsite'=>'Offline / Onsite','intvw_user'=>'Intvw User']),
                 SelectFilter::make('status')
                     ->options(['pending'=>'Pending','done'=>'Done','cancel'=>'Cancel','reschedule'=>'Reschedule']),
                 Filter::make('hari_ini')->label('Hari Ini')
