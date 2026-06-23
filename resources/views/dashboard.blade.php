@@ -140,7 +140,7 @@ body{background:#f9fafb}
     @php
       $total = max($stats['total_kandidat'],1);
       $steps = [
-        ['Lolos Seleksi Administrasi',          $stats['total_kandidat'],     '#111827'],
+        ['Lolos Seleksi',          $stats['total_kandidat'],     '#111827'],
         ['Interview Online',  $funnel['interview_online'],  '#7c3aed'],
         ['App Form',          \App\Models\Kandidat::where('app_form','terkirim')->count(), '#2563eb'],
         ['Interview Offline', $funnel['interview_offline'], '#d97706'],

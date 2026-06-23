@@ -45,13 +45,13 @@ class KandidatResource extends Resource
                 ->sort(1)->group('Pipeline')->badge(Kandidat::count()),
             \Filament\Navigation\NavigationItem::make('Ghisna')
                 ->icon('heroicon-o-user')->url(static::getUrl('ghisna'))
-                ->sort(2)->group('Pipeline')->badge(Kandidat::where('pic','Ghisna')->count()),
+                ->sort(1)->group('Pewawancara')->badge(Kandidat::where('pic','Ghisna')->count()),
             \Filament\Navigation\NavigationItem::make('Nisa')
                 ->icon('heroicon-o-user')->url(static::getUrl('nisa'))
-                ->sort(3)->group('Pipeline')->badge(Kandidat::where('pic','Nisa')->count()),
+                ->sort(2)->group('Pewawancara')->badge(Kandidat::where('pic','Nisa')->count()),
             \Filament\Navigation\NavigationItem::make('Wiwit')
                 ->icon('heroicon-o-user')->url(static::getUrl('wiwit'))
-                ->sort(4)->group('Pipeline')->badge(Kandidat::where('pic','Wiwit')->count()),
+                ->sort(3)->group('Pewawancara')->badge(Kandidat::where('pic','Wiwit')->count()),
         ];
     }
 }

@@ -18,11 +18,11 @@ class TrackingJadwalResource extends Resource
 {
     protected static ?string $model = TrackingJadwal::class;
     protected static ?string $modelLabel = 'Jadwal Wawancara';
-    protected static ?string $pluralModelLabel = 'Main Tracking — Wawancara Online & Offline';
+    protected static ?string $pluralModelLabel = 'Main Tracking — Jadwal Wawancara';
     protected static ?int $navigationSort = 0;
 
     public static function getNavigationIcon(): string|\BackedEnum|null { return 'heroicon-o-calendar-days'; }
-    public static function getNavigationLabel(): string { return 'Main Tracking — Wawancara Online & Offline'; }
+    public static function getNavigationLabel(): string { return 'Main Tracking — Jadwal Wawancara'; }
     public static function getNavigationGroup(): ?string { return 'Pipeline'; }
 
     public static function form(Schema $schema): Schema
@@ -44,8 +44,6 @@ class TrackingJadwalResource extends Resource
                     ->options(['Ghisna'=>'Ghisna','Nisa'=>'Nisa','Wiwit'=>'Wiwit','Fanny'=>'Fanny'])
                     ->helperText('PIC yang akan mewawancarai kandidat secara langsung')
                     ->required(),
-                Select::make('pic_hrd')->label('PIC HRD Penjadwal')
-                    ->options(['Ghisna'=>'Ghisna','Nisa'=>'Nisa','Wiwit'=>'Wiwit','Fanny'=>'Fanny']),
                 TextInput::make('link_gmeet')->label('Link Gmeet')->placeholder('https://meet.google.com/...')->columnSpan(2),
                 Select::make('status')->label('Notes / Status')
                     ->options(['pending'=>'Pending','done'=>'Done','cancel'=>'Cancel','reschedule'=>'Reschedule'])
