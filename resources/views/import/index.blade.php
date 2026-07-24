@@ -32,11 +32,20 @@
       <label class="imp-label">Jenis Data</label>
       <select name="type" class="imp-select">
         <option value="kandidat">Kandidat (Sheet: Ghisna, Nisa, Wiwit)</option>
-        <option value="join">Data JOIN</option>
+        <option value="join">Lolos Seleksi</option>
         <option value="onboard">OnBoard (Operator & Staff)</option>
         <option value="os">Man Power OS</option>
-        <option value="surat_pg">Surat PG</option>
+        <option value="kandidat_arisa">Kandidat Format Arisa (Per Posisi)</option>
       </select>
+      <div id="pic-select" style="display:none;margin-top:12px">
+        <label class="imp-label">PIC (Pewawancara)</label>
+        <select name="pic" style="width:100%;padding:10px;border:1px solid #e5e7eb;border-radius:8px">
+          <option value="Ghisna">Ghisna</option>
+          <option value="Nisa">Nisa</option>
+          <option value="Wiwit">Wiwit</option>
+        </select>
+      </div>
+      
       <label class="imp-label">File Excel (.xlsx)</label>
       <input type="file" name="file" accept=".xlsx,.xls" class="imp-file">
       <button type="submit" class="btn-import">Import Sekarang</button>
@@ -51,11 +60,20 @@
     </h2>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
       <a href="{{ route('export', 'kandidat') }}" class="btn-export">Kandidat</a>
-      <a href="{{ route('export', 'join') }}" class="btn-export">Data JOIN</a>
+      <a href="{{ route('export', 'join') }}" class="btn-export">Lolos Seleksi</a>
       <a href="{{ route('export', 'onboard') }}" class="btn-export">OnBoard</a>
       <a href="{{ route('export', 'os') }}" class="btn-export">Man Power OS</a>
       <a href="{{ route('export', 'surat_pg') }}" class="btn-export">Surat PG</a>
     </div>
   </div>
 </div>
+document.querySelector('select[name="type"]').addEventListener('change', function() {
+    const picDiv = document.getElementById('pic-select');
+    if (this.value === 'kandidat_arisa') {
+        picDiv.style.display = 'block';
+    } else {
+        picDiv.style.display = 'none';
+    }
+});
+</script>
 @endsection

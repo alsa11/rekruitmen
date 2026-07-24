@@ -41,7 +41,7 @@ class TrackingJadwalResource extends Resource
                     ->default('online')->required(),
                 TextInput::make('sourcing')->label('Sourcing'),
                 Select::make('pic_pewawancara')->label('Pewawancara')
-                    ->options(['Ghisna'=>'Ghisna','Nisa'=>'Nisa','Wiwit'=>'Wiwit','Fanny'=>'Fanny'])
+                    ->options(['Ghisna'=>'Ghisna','Nisa'=>'Nisa','Wiwit'=>'Wiwit','Fanny'=>'Fanny', 'Rinto'=>'Rinto'])
                     ->helperText('PIC yang akan mewawancarai kandidat secara langsung')
                     ->required(),
                 TextInput::make('link_gmeet')->label('Link Gmeet')->placeholder('https://meet.google.com/...')->columnSpan(2),
@@ -72,10 +72,6 @@ class TrackingJadwalResource extends Resource
                     ->color(fn(?string $state): string => match($state) {
                         'Ghisna' => 'primary', 'Nisa' => 'info', 'Wiwit' => 'danger', default => 'gray',
                     }),
-                TextColumn::make('pic_hrd')->label('PIC HRD')->badge()
-                    ->color(fn(?string $state): string => match($state) {
-                        'Ghisna' => 'primary', 'Nisa' => 'info', 'Wiwit' => 'danger', default => 'gray',
-                    }),
                 TextColumn::make('link_gmeet')->label('Link Gmeet')
                     ->url(fn($record) => $record->link_gmeet)->openUrlInNewTab()->limit(25)->color('info'),
                 TextColumn::make('status')->label('Notes')->badge()
@@ -86,7 +82,7 @@ class TrackingJadwalResource extends Resource
             ->defaultSort('tanggal','asc')
             ->filters([
                 SelectFilter::make('pic_pewawancara')->label('Pewawancara')
-                    ->options(['Ghisna'=>'Ghisna','Nisa'=>'Nisa','Wiwit'=>'Wiwit','Fanny'=>'Fanny']),
+                    ->options(['Ghisna'=>'Ghisna','Nisa'=>'Nisa','Wiwit'=>'Wiwit','Fanny'=>'Fanny', 'Rinto'=>'Rinto']),
                 SelectFilter::make('tipe_kegiatan')->label('Metode')
                     ->options(['online'=>'Online','test_onsite'=>'Offline / Onsite','intvw_user'=>'Intvw User']),
                 SelectFilter::make('status')

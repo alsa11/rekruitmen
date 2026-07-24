@@ -17,7 +17,8 @@ class JoinController extends Controller
             ->orderBy($sort, $sort=='nama' ? 'asc' : 'desc')
             ->paginate(25)->withQueryString();
 
-        $reminders = Join::whereNotNull('tgl_akhir_kontrak')
+        #mengambil data join yang memiliki tgl_akhir_kontrak dalam 30 hari ke depan untuk ditampilkan di halaman index sebagai pengingat
+            $reminders = Join::whereNotNull('tgl_akhir_kontrak')
             ->whereBetween('tgl_akhir_kontrak',[now(), now()->addDays(30)])
             ->orderBy('tgl_akhir_kontrak')->get();
 

@@ -72,9 +72,12 @@
       @forelse($reminders as $i => $r)
       @php
         $sisa = (int)now()->diffInDays($r->tgl_akhir_kontrak, false);
-        $rowBg = $sisa <= 7 ? '#fef2f2' : ($sisa <= 14 ? '#fffbeb' : '#ffffff');
-        $badgeCls = $sisa <= 7 ? 'background:#fecaca;color:#b91c1c' : ($sisa <= 14 ? 'background:#fde68a;color:#92400e' : 'background:#d1fae5;color:#065f46');
-        $statusLabel = $sisa <= 7 ? '🔴 Kritis' : ($sisa <= 14 ? '🟠 Segera' : '🟡 Perhatian');
+        $rowBg = $sisa 
+        <= 7 ? '#fef2f2' : ($sisa <= 14 ? '#fffbeb' : '#ffffff');
+        $badgeCls = $sisa 
+        <= 7 ? 'background: #fecaca;color: #b91c1c' : ($sisa <= 14 ? 'background: #fde68a;color: #92400e' : 'background: #d1fae5;color: #065f46');
+        $statusLabel = $sisa 
+        <= 7 ? '🔴 Kritis' : ($sisa <= 14 ? '🟠 Segera' : '🟡 Perhatian');
       @endphp
       <tr style="background:{{ $rowBg }}; border-top:1px solid #f3f4f6">
         <td style="padding:12px 16px; color:#9ca3af; font-size:12px">{{ $i+1 }}</td>

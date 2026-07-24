@@ -182,8 +182,8 @@ body{background:#f9fafb}
         <tr>
           <th>Recruiter</th>
           <th style="text-align:center">Total</th>
-          <th style="text-align:center">Int. Online</th>
-          <th style="text-align:center">Int. Offline</th>
+          <th style="text-align:center">Int Online</th>
+          <th style="text-align:center">Int Offline</th>
           <th style="text-align:center">Diterima</th>
           <th style="text-align:center">Ditolak</th>
           <th style="text-align:center">Konversi</th>
@@ -387,8 +387,8 @@ new Chart(document.getElementById('barChart'),{
   data:{
     labels:{!! json_encode($pics) !!},
     datasets:[
-      {label:'Int. Online', data:{!! json_encode(array_map(fn($p)=>$perPic[$p]['online'],$pics)) !!},backgroundColor:'#c4b5fd',borderRadius:4},
-      {label:'Int. Offline',data:{!! json_encode(array_map(fn($p)=>$perPic[$p]['offline'],$pics)) !!},backgroundColor:'#fde68a',borderRadius:4},
+      {label:'Int Online', data:{!! json_encode(array_map(fn($p)=>$perPic[$p]['online'],$pics)) !!},backgroundColor:'#c4b5fd',borderRadius:4},
+      {label:'Int Offline',data:{!! json_encode(array_map(fn($p)=>$perPic[$p]['offline'],$pics)) !!},backgroundColor:'#fde68a',borderRadius:4},
       {label:'Diterima',    data:{!! json_encode(array_map(fn($p)=>$perPic[$p]['diterima'],$pics)) !!},backgroundColor:'#86efac',borderRadius:4},
       {label:'Ditolak',     data:{!! json_encode(array_map(fn($p)=>$perPic[$p]['ditolak'],$pics)) !!},backgroundColor:'#fca5a5',borderRadius:4},
     ]

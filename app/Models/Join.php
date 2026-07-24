@@ -13,6 +13,8 @@ class Join extends Model
         "join_date" => "date",
         "tgl_akhir_kontrak" => "date",
     ];
+    
+    #menghitung selisih antara tgl_akhir_kontrak dengan now() (hari ini) menggunakan fungsi diffInDays. Hasilnya ditampilkan di kolom Sisa Hari."
     public function getHariKontrakAttribute(): ?int
     {
         return $this->tgl_akhir_kontrak ? (int)now()->diffInDays($this->tgl_akhir_kontrak, false) : null;

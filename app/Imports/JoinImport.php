@@ -3,20 +3,10 @@ namespace App\Imports;
 use App\Models\Join;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
-use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
-use Maatwebsite\Excel\Concerns\SkipsOnError;
 use Carbon\Carbon;
 
-class JoinImport implements WithMultipleSheets
-{
-    public function sheets(): array
-    {
-        return ['JOIN' => new JoinSheetImport()];
-    }
-}
-
-class JoinSheetImport implements ToModel, WithHeadingRow, SkipsEmptyRows
+class JoinImport implements ToModel, WithHeadingRow, SkipsEmptyRows
 {
     public function headingRow(): int { return 2; }
 
@@ -29,21 +19,18 @@ class JoinSheetImport implements ToModel, WithHeadingRow, SkipsEmptyRows
         $statusRaw = strtolower($row['probation_kontrak'] ?? '');
         $akhir = null;
 
-        // Hitung tgl_akhir_kontrak dari join_date + durasi
         if ($joinDate) {
             $dt = Carbon::parse($joinDate);
-            if (str_contains($statusRaw, '3')) $akhir = (clone $dt)->addMonths(3)->format('Y-m-d');
+            if (str_contains($statusRaw, '12')) $akhir = (clone $dt)->addMonths(12)->format('Y-m-d');
             elseif (str_contains($statusRaw, '6')) $akhir = (clone $dt)->addMonths(6)->format('Y-m-d');
-            elseif (str_contains($statusRaw, '12')) $akhir = (clone $dt)->addMonths(12)->format('Y-m-d');
+            elseif (str_contains($statusRaw, '3')) $akhir = (clone $dt)->addMonths(3)->format('Y-m-d');
             elseif (str_contains($statusRaw, 'probation')) $akhir = (clone $dt)->addMonths(3)->format('Y-m-d');
             elseif (str_contains($statusRaw, 'kontrak')) $akhir = (clone $dt)->addMonths(6)->format('Y-m-d');
         }
 
-        // Normalize status_kontrak jadi enum-safe
         $status = null;
         if (str_contains($statusRaw, 'probation')) $status = 'probation';
         elseif (str_contains($statusRaw, 'kontrak')) $status = 'kontrak';
-        elseif (str_contains($statusRaw, 'tetap')) $status = 'tetap';
 
         return new Join([
             'nama'              => substr($nama, 0, 255),

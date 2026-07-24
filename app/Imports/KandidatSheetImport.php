@@ -28,7 +28,7 @@ class KandidatSheetImport implements ToModel, WithHeadingRow, SkipsEmptyRows, Wi
         $hasilOff  = $this->normalizeHasil($row['keterangan_3'] ?? null);
         $psikotest = $this->normalizeHasil($row['psikotest'] ?? null);
         $joinDate  = $this->parseDate($row['join'] ?? null);
- #ini
+ 
         Kandidat::updateOrCreate(
             [
                 'nama'  => $nama,

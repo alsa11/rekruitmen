@@ -16,7 +16,7 @@
         <label style="display:block; font-size:13px; font-weight:500; color:var(--text); margin-bottom:6px">Jenis Data</label>
         <select name="jenis" style="width:100%; border:1px solid var(--border); border-radius:8px; padding:9px 14px; font-size:13px; background:var(--surface); color:var(--text)">
           <option value="kandidat">Kandidat (Sheet: Ghisna, Nisa, Wiwit)</option>
-          <option value="join">Data JOIN</option>
+          <option value="join">Lolos Seleksi</option>
           <option value="onboard">OnBoard (Operator & Staff)</option>
           <option value="os">Man Power OS</option>
           <option value="surat_pg">Surat PG</option>
@@ -44,7 +44,7 @@
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px">
       @foreach([
         ['Kandidat',     route('export',['type'=>'kandidat'])],
-        ['Data JOIN',    route('export',['type'=>'join'])],
+        ['Lolos Seleksi',    route('export',['type'=>'join'])],
         ['OnBoard',      route('export',['type'=>'onboard'])],
         ['Man Power OS', route('export',['type'=>'os'])],
         ['Surat PG',     route('export',['type'=>'surat_pg'])],

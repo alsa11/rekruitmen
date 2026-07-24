@@ -5,6 +5,7 @@ use App\Imports\JoinImport;
 use App\Imports\SuratPgImport;
 use App\Imports\OnboardImport;
 use App\Imports\OsImport;
+use App\Imports\KandidatArisaImport;
 use App\Exports\KandidatExport;
 use App\Exports\JoinExport;
 use App\Exports\OnboardExport;
@@ -26,6 +27,10 @@ class ImportController extends Controller
                 'surat_pg' => Excel::import(new SuratPgImport,  $request->file('file')),
                 'onboard'  => Excel::import(new OnboardImport,  $request->file('file')),
                 'os'       => Excel::import(new OsImport,       $request->file('file')),
+                'kandidat_arisa' => (function() use ($request) {
+                    $sheetNames = array_keys(Excel::toArray(new class implements \Maatwebsite\Excel\Concerns\ToArray { public function array(array $a): array { return $a; } }, $request->file('file')));
+                    Excel::import(new KandidatArisaImport($request->pic ?? 'Wiwit', $sheetNames), $request->file('file'));
+                })(),
             };
             return back()->with('success', 'Import berhasil!');
         } catch (\Exception $e) {
